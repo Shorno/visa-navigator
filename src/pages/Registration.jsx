@@ -1,12 +1,13 @@
 import {Form, Input, Button, Typography, message} from 'antd';
 import {UserOutlined, MailOutlined, LockOutlined, LinkOutlined, GoogleOutlined} from '@ant-design/icons';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useAuth} from "../contexts/AuthContext.jsx";
 
 const {Title} = Typography;
 
 export default function Registration() {
     const [form] = Form.useForm();
+    const navigate = useNavigate();
 
     const {signUp, signInWithGoogle} = useAuth()
 
@@ -15,6 +16,8 @@ export default function Registration() {
             const {email, password, name, photoUrl} = values;
             await signUp(email, password, name, photoUrl);
             message.success('Registration successful!');
+            navigate('/');
+
         } catch (error) {
             switch (error.code) {
                 case 'auth/email-already-in-use':
@@ -38,6 +41,7 @@ export default function Registration() {
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 flex flex-col">
                     <Form
+                        validateTrigger={['onBlur', 'onSubmit']}
                         form={form}
                         name="register"
                         onFinish={onFinish}
@@ -62,7 +66,26 @@ export default function Registration() {
                         </Form.Item>
                         <Form.Item
                             name="password"
-                            rules={[{required: true, message: 'Please input your password!'}]}
+                            rules={[
+                                {required: true, message: 'Please input your password!'},
+                                {
+                                    validator: (_, value) => {
+                                        if (!value) {
+                                            return Promise.resolve();
+                                        }
+                                        if (value.length < 6) {
+                                            return Promise.reject(new Error('Password must be at least 6 characters long!'));
+                                        }
+                                        if (!/[A-Z]/.test(value)) {
+                                            return Promise.reject(new Error('Password must contain at least one uppercase letter!'));
+                                        }
+                                        if (!/[a-z]/.test(value)) {
+                                            return Promise.reject(new Error('Password must contain at least one lowercase letter!'));
+                                        }
+                                        return Promise.resolve();
+                                    }
+                                }
+                            ]}
                         >
                             <Input.Password prefix={<LockOutlined/>} placeholder="Password"/>
                         </Form.Item>
