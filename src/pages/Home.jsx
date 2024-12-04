@@ -4,7 +4,6 @@ import LatestVisa from "../components/LatestVisa.jsx";
 
 export default function Home() {
 
-
     return (
         <main>
             <ImageSlider/>
