@@ -1,4 +1,5 @@
 export default function Home() {
+
     return (
         <>
             <div className="container mx-auto p-4">
@@ -6,6 +7,7 @@ export default function Home() {
                 <p className="text-center mt-4">
                     This is a simple application that allows you to keep track of your visa applications.
                 </p>
+
             </div>
         </>
     )

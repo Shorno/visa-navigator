@@ -15,18 +15,20 @@ export default function Navbar() {
                 </div>
 
                 <div className="space-x-4 flex items-center">
-                    <Link to="/" className="text-white hover:text-blue-200">
-                        Home
-                    </Link>
-                    <Link to="/all-visas" className="text-white hover:text-blue-200">
-                        All Visas
-                    </Link>
-                    <Link to="/add-visa" className="text-white hover:text-blue-200">
-                        Add Visa
-                    </Link>
-                    <Link to="/my-visas" className="text-white hover:text-blue-200">
-                        My Visas
-                    </Link>
+                    <div className={"space-x-4 hidden md:block"}>
+                        <Link to="/" className="text-white hover:text-blue-200">
+                            Home
+                        </Link>
+                        <Link to="/all-visas" className="text-white hover:text-blue-200">
+                            All Visas
+                        </Link>
+                        <Link to="/add-visa" className="text-white hover:text-blue-200">
+                            Add Visa
+                        </Link>
+                        <Link to="/my-visas" className="text-white hover:text-blue-200">
+                            My Visas
+                        </Link>
+                    </div>
                     {isAuthenticated ? (
                         <Link to="/logout" className="text-white hover:text-blue-200">
                             Logout

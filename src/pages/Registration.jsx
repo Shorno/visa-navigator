@@ -1,15 +1,30 @@
 import {Form, Input, Button, Typography, message} from 'antd';
 import {UserOutlined, MailOutlined, LockOutlined, LinkOutlined} from '@ant-design/icons';
 import {Link} from "react-router-dom";
+import {useAuth} from "../contexts/AuthContext.jsx";
 
 const {Title} = Typography;
 
 export default function Registration() {
     const [form] = Form.useForm();
 
-    const onFinish = (values) => {
-        console.log('Received values:', values);
-        message.success('Registration successful!');
+    const {signUp} = useAuth()
+
+    const onFinish = async (values) => {
+        try {
+            const {email, password} = values;
+            await signUp(email, password);
+            message.success('Registration successful!');
+        } catch (error) {
+            switch (error.code) {
+                case 'auth/email-already-in-use':
+                    message.error('Email is already associated with an account.');
+                    break;
+                default:
+                    message.error('Failed to register: ' + error.message);
+            }
+            console.error(error);
+        }
     };
 
     return (
@@ -57,8 +72,6 @@ export default function Registration() {
                         >
                             <Input prefix={<LinkOutlined/>} placeholder="Photo URL"/>
                         </Form.Item>
-
-
                         <Form.Item>
                             <Button type="primary" htmlType="submit" className="w-full">
                                 Register
