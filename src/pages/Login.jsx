@@ -1,17 +1,32 @@
-import {Form, Input, Button, Checkbox, Typography, message} from 'antd';
-import {MailOutlined, LockOutlined} from '@ant-design/icons';
+import {Form, Input, Button, Typography, message} from 'antd';
+import {MailOutlined, LockOutlined, GoogleOutlined} from '@ant-design/icons';
 import {Link} from 'react-router-dom';
+import {useAuth} from "../contexts/AuthContext.jsx";
 
 const {Title} = Typography;
 
 export default function Login() {
     const [form] = Form.useForm();
+    const {signInWithGoogle, login} = useAuth()
 
-    const onFinish = (values) => {
-        console.log('Received values:', values);
-        // Here you would typically send the data to your backend for authentication
-        message.success('Login successful!');
+
+    const onFinish = async (values) => {
+        try {
+            const {email, password} = values;
+            await login(email, password);
+            message.success('Login successful!');
+        } catch (error) {
+            switch (error.code) {
+                case 'auth/invalid-credential':
+                    message.error('Email or Password is incorrect. Please try again');
+                    break;
+                default:
+                    message.error('Failed to login: ' + error.message);
+            }
+            console.error(error);
+        }
     };
+
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -48,10 +63,6 @@ export default function Login() {
                         </Form.Item>
 
                         <Form.Item>
-                            <Form.Item name="remember" valuePropName="checked" noStyle>
-                                <Checkbox>Remember me</Checkbox>
-                            </Form.Item>
-
                             <Link className="float-right text-blue-600 hover:text-blue-800" to="/forgot-password">
                                 Forgot password
                             </Link>
@@ -62,7 +73,14 @@ export default function Login() {
                                 Log in
                             </Button>
                         </Form.Item>
-
+                        <div className={"flex justify-center items-center py-4"}>
+                            <Button
+                                onClick={signInWithGoogle}
+                            >
+                                <span className="text-gray-600">Continue With </span>
+                                <GoogleOutlined className={"text-blue-500 text-xl"}/>
+                            </Button>
+                        </div>
                         <div className="text-center">
                             <span className="text-gray-600">Don&#39;t have an account? </span>
                             <Link to="/register" className="text-blue-600 hover:text-blue-800">

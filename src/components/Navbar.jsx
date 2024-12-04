@@ -1,8 +1,17 @@
-import {useState} from 'react';
 import {Link} from 'react-router-dom';
+import {useAuth} from "../contexts/AuthContext.jsx";
+import {Avatar, Button, Popover, Skeleton, Typography} from "antd";
 
+const {Title} = Typography
 export default function Navbar() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const {currentUser, authLoading, logout} = useAuth();
+
+    const userProfile = (
+        <div className={"min-w-32"}>
+            <Title level={5}>{currentUser?.displayName}</Title>
+            <Button className={"w-full"} onClick={logout} type="primary" danger> Logout</Button>
+        </div>
+    );
 
 
     return (
@@ -29,10 +38,13 @@ export default function Navbar() {
                             My Visas
                         </Link>
                     </div>
-                    {isAuthenticated ? (
-                        <Link to="/logout" className="text-white hover:text-blue-200">
-                            Logout
-                        </Link>
+                    {authLoading ? (
+                        <Skeleton.Avatar active size={40}/>
+                    ) : currentUser ? (
+                        <Popover trigger={"hover"} content={userProfile}>
+                            <Avatar size={40} src={currentUser?.photoURL }>{currentUser.displayName[0]}</Avatar>
+                        </Popover>
+
                     ) : (
                         <>
                             <Link to="/login" className="text-white hover:text-blue-200">

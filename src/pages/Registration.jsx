@@ -1,5 +1,5 @@
 import {Form, Input, Button, Typography, message} from 'antd';
-import {UserOutlined, MailOutlined, LockOutlined, LinkOutlined} from '@ant-design/icons';
+import {UserOutlined, MailOutlined, LockOutlined, LinkOutlined, GoogleOutlined} from '@ant-design/icons';
 import {Link} from "react-router-dom";
 import {useAuth} from "../contexts/AuthContext.jsx";
 
@@ -8,12 +8,12 @@ const {Title} = Typography;
 export default function Registration() {
     const [form] = Form.useForm();
 
-    const {signUp} = useAuth()
+    const {signUp, signInWithGoogle} = useAuth()
 
     const onFinish = async (values) => {
         try {
-            const {email, password} = values;
-            await signUp(email, password);
+            const {email, password, name, photoUrl} = values;
+            await signUp(email, password, name, photoUrl);
             message.success('Registration successful!');
         } catch (error) {
             switch (error.code) {
@@ -36,7 +36,7 @@ export default function Registration() {
             </div>
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 flex flex-col">
                     <Form
                         form={form}
                         name="register"
@@ -78,6 +78,14 @@ export default function Registration() {
                             </Button>
                         </Form.Item>
                     </Form>
+                    <div className={"flex justify-center items-center py-4"}>
+                        <Button
+                            onClick={signInWithGoogle}
+                        >
+                            <span className="text-gray-600">Continue With </span>
+                            <GoogleOutlined className={"text-blue-500 text-xl"}/>
+                        </Button>
+                    </div>
                     <div className="text-center">
                         <span className="text-gray-600">Already have an account? </span>
                         <Link to="/login" className="text-blue-600 hover:text-blue-800">
