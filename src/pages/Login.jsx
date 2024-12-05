@@ -1,6 +1,6 @@
 import {Form, Input, Button, Typography, message} from 'antd';
 import {MailOutlined, LockOutlined, GoogleOutlined} from '@ant-design/icons';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useLocation, useNavigate} from 'react-router-dom';
 import {useAuth} from "../contexts/AuthContext.jsx";
 
 const {Title} = Typography;
@@ -9,7 +9,8 @@ export default function Login() {
     const [form] = Form.useForm();
     const {signInWithGoogle, login} = useAuth()
     const navigate = useNavigate();
-
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
 
     const onFinish = async (values) => {
@@ -17,7 +18,7 @@ export default function Login() {
             const {email, password} = values;
             await login(email, password);
             message.success('Login successful!');
-            navigate('/');
+            navigate(from, {replace: true});
         } catch (error) {
             switch (error.code) {
                 case 'auth/invalid-credential':

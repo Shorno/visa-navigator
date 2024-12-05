@@ -19,31 +19,34 @@ export function useAuth() {
 export function AuthProvider({children}) {
     const [currentUser, setCurrentUser] = useState(null);
     const [authLoading, setAuthLoading] = useState(true);
-
+    const [loading, setLoading] = useState(false)
 
     const signUp = async (email, password, displayName, photoURL) => {
+        setLoading(true);
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
             await updateProfile(user, {displayName, photoURL});
-            console.log(user);
             return userCredential;
         } catch (error) {
             console.error(error);
             throw error;
+        } finally {
+            setLoading(false);
         }
     }
 
     const signInWithGoogle = async () => {
+        setLoading(true);
         try {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
-            const user = result.user;
-            console.log(user);
-            return user;
+            return result.user;
         } catch (error) {
             console.error(error);
             throw error;
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -52,28 +55,33 @@ export function AuthProvider({children}) {
     }
 
     const login = async (email, password) => {
+        setLoading(true);
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-            console.log(user);
-            return userCredential;
+            return await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
             console.error(error);
             throw error;
+        } finally {
+            setLoading(false);
         }
     }
 
     useEffect(() => {
+        setAuthLoading(true);
+
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setCurrentUser(user);
             setAuthLoading(false);
-
+        }, (error) => {
+            console.error("Auth state change error:", error);
+            setAuthLoading(false);
         });
 
         return unsubscribe;
     }, []);
 
 
+    console.log(currentUser)
     const values = {
         signUp,
         signInWithGoogle,
@@ -81,6 +89,7 @@ export function AuthProvider({children}) {
         authLoading,
         logout,
         login,
+        loading
     }
 
     return (

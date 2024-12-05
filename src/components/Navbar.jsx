@@ -42,7 +42,9 @@ export default function Navbar() {
                         <Skeleton.Avatar active size={40}/>
                     ) : currentUser ? (
                         <Popover trigger={"hover"} content={userProfile}>
-                            <Avatar size={40} src={currentUser?.photoURL }>{currentUser.displayName[0]}</Avatar>
+                            <Avatar size={40} src={currentUser?.photoURL}>
+                                {currentUser?.displayName ? currentUser.displayName[0] : ''}
+                            </Avatar>
                         </Popover>
 
                     ) : (
