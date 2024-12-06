@@ -8,6 +8,7 @@ export default function AddVisa() {
     const baseURL = getBaseApiUrl();
     const [form] = Form.useForm();
 
+
     const onFinish = async (values) => {
         try {
             const response = await fetch(`${baseURL}/visa`, {
@@ -29,6 +30,7 @@ export default function AddVisa() {
     };
 
     return (
+
         <div className="max-w-2xl my-10 mx-auto p-6 bg-white rounded-lg shadow-md">
             <h1 className="text-2xl font-bold mb-6 text-center">Visa Application Form</h1>
             <Form
@@ -61,10 +63,12 @@ export default function AddVisa() {
                     rules={[{required: true, message: 'Please select a visa type!'}]}
                 >
                     <Select className="w-full">
-                        <Select.Option value="tourist">Tourist Visa</Select.Option>
-                        <Select.Option value="student">Student Visa</Select.Option>
-                        <Select.Option value="official">Official Visa</Select.Option>
-                        <Select.Option value="business">Business Visa</Select.Option>
+                        <Select.Option value="all">All Types</Select.Option>
+                        <Select.Option value="Tourist Visa">Tourist Visa</Select.Option>
+                        <Select.Option value="Student Visa">Student Visa</Select.Option>
+                        <Select.Option value="Skilled Worker Visa">Skilled Worker Visa</Select.Option>
+                        <Select.Option value="Work Visa">Work Visa</Select.Option>
+                        <Select.Option value="Job Seeker Visa">Job Seeker Visa</Select.Option>
                     </Select>
                 </Form.Item>
 
@@ -178,6 +182,7 @@ export default function AddVisa() {
                 </Form.Item>
             </Form>
         </div>
+
     );
 };
 
