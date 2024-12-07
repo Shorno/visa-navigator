@@ -84,7 +84,6 @@ export function AuthProvider({children}) {
     }, []);
 
 
-    console.log(currentUser)
     const values = {
         signUp,
         signInWithGoogle,

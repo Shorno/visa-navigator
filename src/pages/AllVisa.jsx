@@ -3,13 +3,13 @@ import {Select, Spin} from "antd";
 import {useEffect, useState} from "react";
 import {getBaseApiUrl} from "../utils/getBaseApiUrl.jsx";
 import {useAuth} from "../contexts/AuthContext.jsx";
+import {Link} from "react-router-dom";
 
 export default function AllVisa() {
     const [visas, setVisas] = useState([]);
     const baseURL = getBaseApiUrl();
     const {authLoading} = useAuth()
 
-    console.log(visas)
 
 
     const fetchVisas = async () => {
@@ -53,9 +53,9 @@ export default function AllVisa() {
                                 <p className="text-gray-600 mb-2">{visa.visaType.charAt(0).toUpperCase() + visa.visaType.slice(1)}</p>
                                 <p className="text-sm text-gray-500 mb-4">Processing Time: {visa.processingTime}</p>
                                 <p className="text-sm text-gray-500 mb-4">Description: {visa.description}</p>
-                                <a href="#" className="text-blue-500 font-bold flex items-center hover:underline">
+                                <Link to={`/visa/${visa._id}`} className="text-blue-500 font-bold flex items-center hover:underline">
                                     See Details <ArrowRightOutlined className="ml-1" size={16}/>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     ))}
