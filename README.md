@@ -1,8 +1,12 @@
-# React + Vite
+# Visa Navigator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live Site URL](https://visa-navigator.vercel.app/)
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Latest Visa Information**: Stay updated with the latest visa requirements and information for various countries.
+- **Visa Application Tracking**: Track the status of your visa application in real-time.
+- **24/7 Support**: Get assistance anytime with our round-the-clock customer support.
+- **High Approval Rate**: Benefit from our 98% visa approval rate.
+- **Secure and Safe**: Your personal information is protected with best-in-class security measures.
+
