@@ -2,6 +2,7 @@ import {ArrowRightOutlined} from "@ant-design/icons";
 import {getBaseApiUrl} from "../utils/getBaseApiUrl.jsx";
 import {useEffect, useState} from "react";
 import {Spin} from "antd";
+import {Link} from "react-router-dom";
 
 
 export default function LatestVisa() {
@@ -48,19 +49,19 @@ export default function LatestVisa() {
                                         <li>Fee: ${latestVisa.fee}</li>
                                         <li>Validity: {latestVisa.validity}</li>
                                     </ul>
-                                    <a href="#" className="text-blue-500 font-bold flex items-center hover:underline">
+                                    <Link to={`/visa/${latestVisa._id}`} className="text-blue-500 font-bold flex items-center hover:underline">
                                         See Details <ArrowRightOutlined className="ml-1" size={16}/>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </Spin>
                 <div className="text-center mt-8">
-                    <a href="/all-visas"
+                    <Link to={"/all-visas"}
                        className="bg-blue-500 text-white px-6 py-3 rounded-full font-bold hover:bg-blue-600 transition duration-300">
                         See All Visas
-                    </a>
+                    </Link>
                 </div>
             </section>
         </>

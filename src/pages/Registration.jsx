@@ -8,6 +8,8 @@ const {Title} = Typography;
 export default function Registration() {
     const [form] = Form.useForm();
     const navigate = useNavigate();
+    const from = location.state?.from?.pathname || '/';
+
 
     const {signUp, signInWithGoogle} = useAuth()
 
@@ -29,6 +31,19 @@ export default function Registration() {
             console.error(error);
         }
     };
+
+
+    const handleGoogleSignIn = async () => {
+        try {
+            await signInWithGoogle();
+            message.success('Login successful!');
+            navigate(from, {replace: true});
+        } catch (error) {
+            message.error('Failed to login with Google: ' + error.message);
+            console.error(error);
+        }
+    }
+
 
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -103,7 +118,7 @@ export default function Registration() {
                     </Form>
                     <div className={"flex justify-center items-center py-4"}>
                         <Button
-                            onClick={signInWithGoogle}
+                            onClick={handleGoogleSignIn}
                         >
                             <span className="text-gray-600">Continue With </span>
                             <GoogleOutlined className={"text-blue-500 text-xl"}/>

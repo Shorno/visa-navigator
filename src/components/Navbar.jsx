@@ -37,6 +37,9 @@ export default function Navbar() {
                         <Link to="/my-visas" className="text-white hover:text-blue-200">
                             My Visas
                         </Link>
+                        <Link to="/my-visa-applications" className="text-white hover:text-blue-200">
+                            My Visa Applications
+                        </Link>
                     </div>
                     {authLoading ? (
                         <Skeleton.Avatar active size={40}/>

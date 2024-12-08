@@ -36,7 +36,7 @@ export default function MyVisas() {
                 throw new Error('Failed to delete visa');
             }
             message.success("Visa deleted successfully!");
-            getVisasByEmail();
+            await getVisasByEmail();
         } catch (error) {
             console.error("Error:", error);
             message.error("Failed to delete visa");

@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Modal, Form, Input, Button, DatePicker} from 'antd';
+import {Modal, Form, Input, Button, DatePicker, message} from 'antd';
 import dayjs from "dayjs";
 import {getBaseApiUrl} from "../utils/getBaseApiUrl.jsx";
 
@@ -34,6 +34,8 @@ export default function VisaApplicationModal({user, visa}) {
             })
             const data = await response.json();
             console.log("Success:", data);
+            message.success("Visa Application successful!");
+
             setIsModalVisible(false);
             form.resetFields();
         } catch (errorInfo) {
