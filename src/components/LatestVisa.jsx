@@ -38,7 +38,7 @@ export default function LatestVisa() {
                 <Spin spinning={loading}>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {latestVisas.map((latestVisa) => (
-                            <div key={latestVisa.country} className="bg-white rounded-lg shadow-md overflow-hidden">
+                            <div key={latestVisa._id} className="bg-white rounded-lg shadow-md overflow-hidden">
                                 <img src={latestVisa.countryImage} alt="Country"
                                      className="w-full h-48 object-cover"/>
                                 <div className="p-6">

@@ -9,6 +9,7 @@ import AllVisa from "./pages/AllVisa.jsx";
 import VisaDetails from "./pages/VisaDetails.jsx";
 import MyVisas from "./pages/MyVisas.jsx";
 import MyVisaApplications from "./pages/MyVisaApplications.jsx";
+import NotFound from "./pages/NotFound.jsx";
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
                         <Route path="/my-visa-applications" element={<ProtectedLayout><MyVisaApplications/></ProtectedLayout>}/>
                         <Route path="/all-visas" element={<AllVisa/>}/>
                     </Route>
+                    <Route path="*" element={<NotFound/>}/>
                 </Routes>
             </BrowserRouter>
         </>

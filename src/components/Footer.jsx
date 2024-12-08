@@ -1,16 +1,19 @@
 import {Link} from 'react-router-dom';
+import visaLogo from '../assets/visaLogo.png';
 
 export default function Footer() {
     return (
         <footer className="bg-blue-600 text-white">
             <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
                 <div className="xl:grid xl:grid-cols-3 xl:gap-8">
-                    <div className="space-y-8 xl:col-span-1">
-                        <img
-                            className="h-10"
-                            src="/placeholder.svg?height=40&width=160"
-                            alt="Visa Navigator Logo"
-                        />
+                    <div className="space-y-4 xl:col-span-1">
+                        <div className={"flex -ml-8"}>
+                            <img
+                                className="h-40"
+                                src={visaLogo}
+                                alt="Visa Navigator Logo"
+                            />
+                        </div>
                         <p className="text-sm">
                             Simplifying your visa application process, one step at a time.
                         </p>
@@ -134,7 +137,7 @@ export default function Footer() {
                 </div>
                 <div className="mt-12 border-t border-blue-500 pt-8">
                     <p className="text-base text-white xl:text-center">
-                        &copy; 2023 Visa Navigator, Inc. All rights reserved.
+                        &copy; 2024 Visa Navigator, Inc. All rights reserved @Shorno
                     </p>
                 </div>
             </div>

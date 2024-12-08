@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
 import {useAuth} from "../contexts/AuthContext.jsx";
 import {Avatar, Button, Popover, Skeleton, Typography} from "antd";
+import visaLogo from "../assets/visaLogo.png";
 
 const {Title} = Typography
 export default function Navbar() {
@@ -18,14 +19,19 @@ export default function Navbar() {
         <nav className="bg-blue-600 p-4 h-16 flex">
             <div className="container mx-auto flex justify-between items-center">
                 <div>
-                    <Link to="/" className="text-white text-2xl font-bold">
+                    <Link to="/" className="text-white text-2xl font-bold flex items-center">
+                        <img
+                            className="h-20"
+                            src={visaLogo}
+                            alt="Visa Navigator Logo"
+                        />
                         Visa Navigator
                     </Link>
                 </div>
 
                 <div className="space-x-4 flex items-center">
                     <div className={"space-x-4 hidden md:block"}>
-                        <Link to="/" className="text-white hover:text-blue-200">
+                    <Link to="/" className="text-white hover:text-blue-200">
                             Home
                         </Link>
                         <Link to="/all-visas" className="text-white hover:text-blue-200">
