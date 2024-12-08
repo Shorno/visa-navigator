@@ -1,22 +1,27 @@
 import {Form, Input, Select, Checkbox, Button, message} from 'antd';
 import {getBaseApiUrl} from "../utils/getBaseApiUrl.jsx";
+import {useAuth} from "../contexts/AuthContext.jsx";
 
 const {TextArea} = Input;
 
 export default function AddVisa() {
+
+    const {currentUser} = useAuth();
 
     const baseURL = getBaseApiUrl();
     const [form] = Form.useForm();
 
 
     const onFinish = async (values) => {
+        const updatedValues = {...values, email: currentUser.email};
+
         try {
             const response = await fetch(`${baseURL}/visa`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(values)
+                body: JSON.stringify(updatedValues)
             })
             const data = await response.json();
             console.log("Success:", data);
@@ -63,7 +68,7 @@ export default function AddVisa() {
                     rules={[{required: true, message: 'Please select a visa type!'}]}
                 >
                     <Select className="w-full">
-                        <Select.Option value="all">All Types</Select.Option>
+                        <Select.Option value="All">All Types</Select.Option>
                         <Select.Option value="Tourist Visa">Tourist Visa</Select.Option>
                         <Select.Option value="Student Visa">Student Visa</Select.Option>
                         <Select.Option value="Skilled Worker Visa">Skilled Worker Visa</Select.Option>
@@ -87,10 +92,10 @@ export default function AddVisa() {
                 >
                     <Checkbox.Group className="w-full">
                         <div className="grid grid-cols-2 gap-2">
-                            <Checkbox value="passport">Valid Passport</Checkbox>
-                            <Checkbox value="application">Visa Application Form</Checkbox>
-                            <Checkbox value="photo">Recent Passport-sized Photograph</Checkbox>
-                            <Checkbox value="financialProof">Proof of Financial Means</Checkbox>
+                            <Checkbox value="Passport">Valid Passport</Checkbox>
+                            <Checkbox value="Application">Visa Application Form</Checkbox>
+                            <Checkbox value="Photo">Recent Passport-sized Photograph</Checkbox>
+                            <Checkbox value="FinancialProof">Proof of Financial Means</Checkbox>
                         </div>
                     </Checkbox.Group>
                 </Form.Item>

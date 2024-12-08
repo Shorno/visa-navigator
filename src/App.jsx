@@ -7,6 +7,7 @@ import AddVisa from "./pages/AddVisa.jsx";
 import ProtectedLayout from "./layout/ProtectedLayout.jsx";
 import AllVisa from "./pages/AllVisa.jsx";
 import VisaDetails from "./pages/VisaDetails.jsx";
+import MyVisas from "./pages/MyVisas.jsx";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/add-visa" element={<ProtectedLayout><AddVisa/></ProtectedLayout>}/>
                         <Route path="/visa/:id" element={<ProtectedLayout><VisaDetails/></ProtectedLayout>}/>
+                        <Route path="/my-visas" element={<ProtectedLayout><MyVisas/></ProtectedLayout>}/>
                         <Route path="/all-visas" element={<AllVisa/>}/>
                     </Route>
                 </Routes>

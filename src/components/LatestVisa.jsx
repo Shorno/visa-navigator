@@ -45,7 +45,7 @@ export default function LatestVisa() {
                                     <p className="text-gray-600 mb-4">{latestVisa.visaType}</p>
                                     <ul className="text-sm text-gray-500 mb-4">
                                         <li>Processing Time: {latestVisa.processingTime}</li>
-                                        <li>Fee: {latestVisa.fee}</li>
+                                        <li>Fee: ${latestVisa.fee}</li>
                                         <li>Validity: {latestVisa.validity}</li>
                                     </ul>
                                     <a href="#" className="text-blue-500 font-bold flex items-center hover:underline">

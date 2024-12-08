@@ -3,9 +3,12 @@ import {CalendarOutlined, ClockCircleOutlined, DollarCircleOutlined, FileOutline
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {getBaseApiUrl} from "../utils/getBaseApiUrl.jsx";
+import VisaApplicationModal from "../components/VisaApplicationModal.jsx";
+import {useAuth} from "../contexts/AuthContext.jsx";
 
 export default function VisaDetails() {
     const [visaDetails, setVisaDetails] = useState([]);
+    const {currentUser} = useAuth();
     const {id} = useParams()
     const baseURL = getBaseApiUrl();
 
@@ -73,11 +76,7 @@ export default function VisaDetails() {
                                 <p className="text-gray-600 mb-6">
                                     {visa.ageRestriction}
                                 </p>
-
-                                <button
-                                    className="bg-blue-500 text-white px-6 py-3 rounded-md font-bold hover:bg-blue-600 transition duration-300">
-                                    Apply for Visa
-                                </button>
+                                <VisaApplicationModal user={currentUser} visa={visa}/>
                             </div>
                         </div>
                     ))}
