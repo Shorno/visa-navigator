@@ -1,7 +1,7 @@
 import {ArrowRightOutlined} from "@ant-design/icons";
 import {getBaseApiUrl} from "../utils/getBaseApiUrl.jsx";
 import {useEffect, useState} from "react";
-import {Spin} from "antd";
+import {Spin, Tooltip} from "antd";
 import {Link} from "react-router-dom";
 
 export default function LatestVisa() {
@@ -37,9 +37,10 @@ export default function LatestVisa() {
             <Spin spinning={loading}>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {latestVisas.map((latestVisa) => (
-                        <div
-                            key={latestVisa._id}
-                            className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-colors duration-300"
+                        <div id={"clickable"}
+                             key={latestVisa._id}
+                             className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-colors duration-300"
+                             data-tip="Apply for Visa"
                         >
                             <img
                                 src={latestVisa.countryImage}
@@ -80,6 +81,7 @@ export default function LatestVisa() {
                     See All Visas
                 </Link>
             </div>
+
         </section>
     )
 }
