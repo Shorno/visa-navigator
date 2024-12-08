@@ -36,7 +36,9 @@ export default function AddVisa() {
 
     return (
 
-        <div className="max-w-2xl my-10 mx-auto p-6 bg-white rounded-lg shadow-md">
+        <div className={"py-20"}>
+
+        <div className="max-w-2xl py-10 mx-auto p-6 bg-white rounded-lg shadow-md">
             <h1 className="text-2xl font-bold mb-6 text-center">Visa Application Form</h1>
             <Form
                 requiredMark={false}
@@ -187,6 +189,8 @@ export default function AddVisa() {
                 </Form.Item>
             </Form>
         </div>
+        </div>
+
 
     );
 };

@@ -68,7 +68,7 @@ export default function MyVisaApplications() {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl font-bold mb-8">My Visa Applications</h1>
+            <h1 className="text-3xl font-bold mb-8 dark:text-white">My Visa Applications</h1>
             <Spin spinning={loading}>
                 <Flex justify={"end"} className={"py-10 max-w-96"}>
                     <Search

@@ -49,7 +49,7 @@ export default function MyVisas() {
 
     if (myVisas.length === 0) {
         return <div className={"h-screen w-full flex justify-center items-center"}>
-            <Empty className={"text-3xl"} description="No visas found. Please add Visa to see in the list"/>
+            <Empty className={"text-3xl dark:text-white"} description="No visas found. Please add Visa to see in the list"/>
         </div>
     }
 
